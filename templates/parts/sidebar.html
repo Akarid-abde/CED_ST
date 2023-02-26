@@ -1,0 +1,55 @@
+{% load static %}
+
+      <nav class="navbar navbar-expand-lg navbar-dark p-3 bg-light border-bottom" id="headerNav">
+     <div class="container-fluid">
+    <a class="navbar-brand d-block d-lg-none" href="#">
+      <img src="{% static 'assets/img/logo.png' %}" height="80" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+ 
+    <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mx-auto ">
+        {% if user.is_authenticated %}
+        <!-- 
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-dark" aria-current="page" href="{% url 'demandeST' %}">DemandeDATE</a>
+        </li> 
+        -->
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-dark" aria-current="page" href="{% url 'demandeCED' %}">DCED</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-dark" aria-current="page" href="{% url 'index' %}">Accueil</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-dark" aria-current="page" href="{% url 'register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-dark" aria-current="page" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+     
+        <li class="nav-item d-none d-lg-block">
+          <a class="nav-link mx-2" href="#">
+            <img src="{% static 'assets/img/logo.png' %}" height="80" />
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a class="nav-link mx-2 dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ user.email }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item text-dark" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+</body>
+</html>

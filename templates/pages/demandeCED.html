@@ -1,0 +1,381 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container d-flex justify-content-center  py-5 border">
+    <div class="row mx-5 py-2 ">
+        {% if messages %}
+        <div class="alert alert-success py-2" role="alert">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+              {{ message }}
+          </li>
+          {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+<div class="row mx-5 py-2">
+    <form id="form" action="" class="py-2" method="POST" enctype="multipart/form-data">
+
+        
+        {% csrf_token %}
+
+               <!-- Doctorant infos -->
+        <fieldset class="form-row py-2 mx-5">
+                <legend class="d-flex p-2">Qui Fait La Demande</legend>
+
+                <div class="form-group col-md-12">
+                    {{form|crispy}}
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="">Proposition de date de soutenance*</label>
+                    <input name="DatePropose" type="date" class="form-control" id=""  required="true">
+                </div>
+
+                <div class="form-group col-md-4 hidden">
+                    <input name="NomPrenom_H" type="text" class="form-control" hidden="true" id="" require="true">
+                </div>
+                
+                <div class="form-group col-md-4 hidden">
+                    <input name="Heure_H" type="text" class="form-control" hidden="true" id="" require="true">
+                </div>
+        </fieldset>
+
+        <!-- Doctorant infos --> 
+        <fieldset class="form-row py-2 mx-5">
+            <legend class="d-flex p-2">Information Doctorant</legend>
+
+            <div class="form-group col-md-4">
+                <label for="">doctorantNom*</label>
+                <input name="doctorantNom" type="text" class="form-control" id="" require="true">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">doctorantPrenom*</label>
+                <input name="doctorantPrenom" type="text" class="form-control" id="" required="true">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">doctorantCNE_Masser*</label>
+                <input name="doctorantCNE_Masser" type="text" class="form-control" id="" required="true">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="">doctorantApogee*</label>
+                <input name="doctorantApogee" type="number" class="form-control" id="" required="true">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Cv*</label>
+                <input name="Cv" type="file" class="form-control" id="" required="true">
+            </div>
+
+            <br/><br/>
+        </fieldset>
+
+        <hr><br>
+
+        <!-- Doctorant These -->
+        <fieldset class="form-row py-2 mx-5">
+            <legend class="d-flex p-2">Information These</legend>
+            <div class="form-group col-md-12">
+                <label for="">Titre These*</label>
+                <input name="TitreThese" type="text" class="form-control" id=""  required="true">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Discipline *</label>
+                <input name="DesciplineThese" type="text" class="form-control" id=""  required="true">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Spécialité *</label>
+                <input name="SpeciliteThses" type="text" class="form-control" id="" required="true">
+            </div>
+  
+            <div class="form-group col-md-4">
+                <label for="">Date Inscription These *</label>
+                <input name="DateInscriptionThese" type="date" class="form-control" id=""  required="true">
+            </div>
+        </fieldset>
+
+        <hr><br>
+
+    
+       <!-- Demandes du Soutenance -->
+        <fieldset class="form-row py-2 mx-5">
+            <legend class="d-flex p-2">Demande du Soutenance</legend>
+        
+        <div class="form-group col-md-6">
+            <label for="">Brevet</label>
+            <input name="Brevet" type="file" placeholder=""  class="form-control" id="" required="true" accept="application/pdf">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="">Chapitre Livre</label>
+            <input name="ChapitreLivre" type="file" placeholder=""  class="form-control" id="" required="true" accept="application/pdf">
+        </div>
+
+        <div class="form-group col-md-4">
+                <label for="">Demande de Directeur*</label>
+                <input name="DemandeDirecteur" type="file"  placeholder="" class="form-control" id="" required="true" accept="application/pdf">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Demande de Doctorant*</label>
+                <input name="DemandeDoctorant" type="file" placeholder=""  class="form-control" id="" required="true" accept="application/pdf">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Rapport de Directeur*</label>
+                <input name="RapportDirecteur" type="file" placeholder=""  class="form-control" id="" required="true" accept="application/pdf">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="">These*</label>
+                <input name="These" type="file" placeholder=""  class="form-control" id="" required="true" accept="application/pdf">
+            </div>
+             
+
+            <div class="form-group col-md-6">
+                <label for="">Lien Publication 1*</label>
+                <input name="lienPub1" type="url" placeholder=""  class="form-control" id="" required="true">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="">Lien Publication 2*</label>
+                <input name="lienPub2" type="url" placeholder=""  class="form-control" id="" required="true">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="">Lien Publication 3</label>
+                <input name="lienPub3" type="url" placeholder=""  class="form-control" id="">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="">Lien Publication 4</label>
+                <input name="lienPub4" type="url" placeholder=""  class="form-control" id="">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Communication</label>
+                <input name="Communication" type="file" placeholder=""  class="form-control" id="" required="true" accept="application/pdf">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Communication Orale</label>
+                <input name="CommunicationOrale" type="file" placeholder=""  class="form-control" id="" required="true" accept="application/pdf">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Communication Poster</label>
+                <input name="CommunicationPoster" type="file" placeholder=""  class="form-control" id="" required="true" accept="application/pdf,application/png,application/jpg">
+            </div>
+        </fieldset>
+
+        <hr><br>
+
+        <!-- Proposition des jurys de soutenance -->
+        <fieldset class="form-row py-2 mx-5">
+            <legend class="d-flex p-2">Proposition des jurys de soutenance</legend>
+            
+            <div style="width: 100%; height: 15px; border-bottom: 1px solid black; text-align: center">
+                <span class="text-dark" style="margin-top:-15% !important; font-size: 16px; background-color: white; padding: 0px 10px;">
+                    Rapporteur 1
+                </span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Nom Rapporteur</label>
+                <input name="NomRapporteur" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Prenom Rapporteur</label>
+                <input name="PrenomRapporteur" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Etablisement Rapporteur</label>
+                <input name="EtablisementRapporteur" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Email Rapporteur</label>
+                <input name="EmailRapporteur" type="email"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Tele Rapporteur</label>
+                <input name="TeleRapporteur" type="number"  placeholder="" class="form-control" id="">
+            </div>
+
+            <br><hr>
+
+            <div style="width: 100%; height: 15px; border-bottom: 1px solid black; text-align: center">
+                <span class="text-dark" style="margin-top:-15% !important; font-size: 16px; background-color: white; padding: 0px 10px;">
+                    Rapporteur 2
+                </span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Nom Rapporteur</label>
+                <input name="NomRapporteur2" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Prenom Rapporteur</label>
+                <input name="PrenomRapporteur2" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Etablissement Rapporteur</label>
+                <input name="EtablisementRapporteur2" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Email Rapporteur</label>
+                <input name="EmailRapporteur2" type="email"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Tele Rapporteur</label>
+                <input name="TeleRapporteur2" type="number"  placeholder="" class="form-control" id="">
+            </div>
+
+            <br><hr>
+
+            <div style="width: 100%; height: 15px; border-bottom: 1px solid black; text-align: center">
+                <span class="text-dark" style="margin-top:-15% !important; font-size: 16px; background-color: white; padding: 0px 10px;">
+                    Rapporteur 3
+                </span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Nom Rapporteur</label>
+                <input name="NomRapporteur3" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Prenom Rapporteur</label>
+                <input name="PrenomRapporteur3" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Etablissement Rapporteur</label>
+                <input name="EtablisementRapporteur3" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Email Rapporteur</label>
+                <input name="EmailRapporteur3" type="email"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Tele Rapporteur</label>
+                <input name="TeleRapporteur3" type="number"  placeholder="" class="form-control" id="">
+            </div>
+
+
+            <div style="width: 100%; height: 15px; border-bottom: 1px solid black; text-align: center">
+                <span class="text-dark" style="margin-top:-15% !important; font-size: 16px; background-color: white; padding: 0px 10px;">
+                    Examinateur 1
+                </span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Nom Examinateur</label>
+                <input name="NomExaminateur" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Prenom Examinateur</label>
+                <input name="PrenomExaminateur" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Etablisement Examinateur</label>
+                <input name="EtablisementExaminateur" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Email Examinateur</label>
+                <input name="EmailExaminateur" type="email"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Tele Examinateur</label>
+                <input name="TeleExaminateur" type="number"  placeholder="" class="form-control" id="">
+            </div>
+
+            <div style="width: 100%; height: 15px; border-bottom: 1px solid black; text-align: center">
+                <span class="text-dark" style="margin-top:-15% !important; font-size: 16px; background-color: white; padding: 0px 10px;">
+                    Examinateur 2
+                </span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Nom Examinateur</label>
+                <input name="NomExaminateur2" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Prenom Examinateur</label>
+                <input name="PrenomExaminateur2" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Etablissement Examinateur</label>
+                <input name="EtablisementExaminateur2" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Email Examinateur</label>
+                <input name="EmailExaminateur2" type="email"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Tele Examinateur</label>
+                <input name="TeleExaminateur2" type="number"  placeholder="" class="form-control" id="">
+            </div>
+
+            <div style="width: 100%; height: 15px; border-bottom: 1px solid black; text-align: center">
+                <span class="text-dark" style="margin-top:-15% !important; font-size: 16px; background-color: white; padding: 0px 10px;">
+                    Président
+                </span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Nom President</label>
+                <input name="NomPresident" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Prenom President</label>
+                <input name="PrenomPresident" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Etablissement President</label>
+                <input name="EtablisementPresident" type="text"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Email President</label>
+                <input name="EmailPresident" type="email"  placeholder="" class="form-control" id="">
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label for="">Tele President</label>
+                <input name="TelePresident" type="number"  placeholder="" class="form-control" id="">
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Valider</button>
+
+    </form>
+</div>
+
+</div>
+</div>
+
+{% endblock content %}

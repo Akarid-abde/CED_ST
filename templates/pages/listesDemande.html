@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1>Listes des demandes</h1>
+        {% if user.is_superuser %}
+        {% for x in demande %}
+        
+            
+            <p>DEMANDE DE MONSIEUR  : {{x.Nom}}</p>
+            <p>Soutenance De Doctorat En Sciences Mr {{x.Doctorant}}</p>
+        
+            <div class="card d-flex flex-row justify-content-center">
+            <iframe src="{{ x.Cv.url }}"   type='application/pdf'  style="height:300px; width:360px;margin-left: 8px;">
+            </iframe>
+            
+            <iframe src="{{ x.ThesePiece.url }}"  type='application/pdf' style="height:300px; width:360px">
+            </iframe>
+        </div>
+
+        <P>Avis de soutnance</P>
+        <img src="{{ x.AvisSoutnance.url }}" alt=""  style="height:1241px; width:1755px">
+            </img>
+        <!-- <p><a href="{{x.cv.url}}"></a></p> -->
+        <!-- 
+            <button class="btn bg-success text-light flex-bottom">
+                <a href="{{x.cv.url}}" download><i class="fa fa-download"></i></a>
+            </button> 
+        -->
+        {% endfor %}
+        {% endif %}
+    </div>
+    
+    <div class="row">
+        <!--
+         <h1>Add Somthing Here</h1>
+         <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{lf}}
+            <input type="submit" value="save">
+        </form>  -->
+
+
+        <!-- {% if user.is_superuser %}
+        <p>Hello, admin.</p>
+        {% else %}
+        <p>Hello, ordinary visitor.</p>
+        {% endif %} -->
+    </div>
+</div>
+
+{% endblock content %}

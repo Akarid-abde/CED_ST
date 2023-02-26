@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container d-flex flex-row justify-content-center  py-5">
+    <div class="row">
+        {% if messages %}
+        <div class="alert alert-success py-2" role="alert">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+              {{ message }}
+          </li>
+          {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="row mx-5 py-2 ">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group col-md-12 m-5">
+                {{lf|crispy}}
+            </div>
+            <input type="submit" class="justify-content-center" value="Valider la demande">
+        </form> 
+</div>
+</div>
+
+{% endblock content %}
