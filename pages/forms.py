@@ -13,6 +13,15 @@ class CEDForm(forms.ModelForm):
         fields = ("NomPrenom", "Heure")
 
 
+class PROF(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PROF, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Professeur
+        fields = '__all__'
+
+
 class DemandeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DemandeForm, self).__init__(*args, **kwargs)

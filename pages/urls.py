@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.index, name='index'),  # www.site.com/pages/index
     # path('', views.index, name='index'),  # www.site.com/
     # www.site.com/demandeST/
+    path('importExcel/', views.readExcel, name='importExcel'),
     path('demandeST/', views.demandeST, name='demandeST'),
     path('demandeCED/', views.DCED, name='demandeCED'),
     path('demandelist/', views.listerdemande,

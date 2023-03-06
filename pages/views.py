@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+import pandas
 from django.http import HttpResponse
-from .models import Demande, DemandeCED
+from .models import Demande, DemandeCED, Professeur
 from .forms import *
 from django.views.decorators.clickjacking import xframe_options_deny
 from django.views.decorators.clickjacking import xframe_options_sameorigin
@@ -67,9 +68,38 @@ def demandeST(request):
         return render(request, 'pages/demandeST.html', {'lf': DemandeForm})
 
 
+def readExcel(request):
+    if not request.user.is_authenticated:
+        return render(request, 'pages/login_error.html')
+    else:
+        if request.method == 'POST':
+            excel = request.FILES.get('excel')
+            df = pandas.read_excel(excel)
+            # count = len(df.index)
+            count = 2
+            for index, row in df.iterrows():
+                # print(int(row[0]), end="\n\n")
+                # print(row[1], end="\n\n")
+                # print(row[2], end="\n\n")
+                # print(row[3], end="\n\n")
+
+                data = PROF(
+                    DOTI=Professeur(DOTI=int(row[0])),
+                    nomComplete=Professeur(nomComplete=row[1]),
+                    Grade=Professeur(Grade=row[2]),
+                    DEPART=Professeur(DEPART=row[3])
+                )
+
+                # print(data)
+                # save data
+                data.save()
+                if index == count - 1:
+                    break
+        return render(request, 'pages/importExcel.html', {'form': PROF})
+
+
 @ xframe_options_sameorigin
 def DCED(request):
-
     if not request.user.is_authenticated:
         return render(request, 'pages/login_error.html')
     else:
